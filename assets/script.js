@@ -41,7 +41,19 @@ function whoWon(human, computer) {
         userInput = human;
     }
 
-    console.log(human, computer);
+    switch(human){
+        case ("r"):
+            yourChoice = "Rock";
+            break;
+        case ("p"):
+            yourChoice = "Paper";
+            break;
+        case ("s"):
+            yourChoice = "Scissors";
+            break;
+        default:
+            alert("Oh node! Something went wrong!");
+    }
 
     if(human === computer){
         outcomeMessage = `${yourChoice} = ${computerChoice}. Tie. :|`
@@ -50,11 +62,9 @@ function whoWon(human, computer) {
         switch (computer){
             case ("r"):
                 if(human === "s"){
-                    yourChoice = "Scissors";
                     outcomeMessage = "Rock crushes your scissors. You lose. :(";
                     return("Loss");
                 } else if (human === "p"){
-                    yourChoice = "Paper";
                     outcomeMessage = "Paper overshadows rock!!! Winner!"
                     return("Win!");
                 }
@@ -62,11 +72,9 @@ function whoWon(human, computer) {
                 
             case ("p"):
                 if(human === "s"){
-                    yourChoice = "Scissors";
                     outcomeMessage = "Scissors slice through paper!! You win!!"
                     return("Win!");
                 } else if(human === "r") {
-                    yourChoice = "Rock";
                     outcomeMessage = "Paper covers your rock. You lose. :(";
                     return("Loss");
                 }
@@ -74,11 +82,9 @@ function whoWon(human, computer) {
                     
             case ("s"):
                 if(human === "p"){
-                    yourChoice = "Paper";
                     outcomeMessage = "Your paper got cut.  You lose. :(";
                     return("Loss");
                 } else if(human === "r"){
-                    yourChoice = "Rock";
                     outcomeMessage = "Rock smashes scissors into tiny bits!! You win!!!";
                     return("Win!");
                 }
