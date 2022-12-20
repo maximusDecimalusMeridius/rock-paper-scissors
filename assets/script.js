@@ -34,11 +34,7 @@ function generateChoice() {
 
 function whoWon(human, computer) {
     
-    if(human === computer){
-        return("Tie");
-    }
-
-    //Present an error and prompt user for a valid input until they enter one
+        //Present an error and prompt user for a valid input until they enter one
     while(!validationArray.includes(human) || human === null){
         human = prompt("ERROR: Please select a VALID choice - R, P, or S to signify your choice of rock, paper, or scissors");
         // set global userInput variable to new value
@@ -47,39 +43,50 @@ function whoWon(human, computer) {
 
     console.log(human, computer);
 
-    switch (computer){
-        case ("r"):
-            if(human === "s"){
-                yourChoice = "Scissors";
-                return("Loss");
-            } else if (human === "p"){
-                yourChoice = "Paper";
-                return("Win!");
-            }
-            break;
-            
-        case ("p"):
-            if(human === "s"){
-                yourChoice = "Scissors";
-                return("Win!");
-            } else if(human === "r") {
-                yourChoice = "Rock";
-                return("Loss");
-            }
-            break;
+    if(human === computer){
+        outcomeMessage = `${yourChoice} = ${computerChoice}. Tie. :|`
+        return("Tie");
+    } else {
+        switch (computer){
+            case ("r"):
+                if(human === "s"){
+                    yourChoice = "Scissors";
+                    outcomeMessage = "Rock crushes your scissors. You lose. :(";
+                    return("Loss");
+                } else if (human === "p"){
+                    yourChoice = "Paper";
+                    outcomeMessage = "Paper overshadows rock!!! Winner!"
+                    return("Win!");
+                }
+                break;
                 
-        case ("s"):
-            if(human === "p"){
-                yourChoice = "Paper";
-                return("Loss");
-            } else if(human === "r"){
-                yourChoice = "Rock";
-                return("Win!");
-            }
+            case ("p"):
+                if(human === "s"){
+                    yourChoice = "Scissors";
+                    outcomeMessage = "Scissors slice through paper!! You win!!"
+                    return("Win!");
+                } else if(human === "r") {
+                    yourChoice = "Rock";
+                    outcomeMessage = "Paper covers your rock. You lose. :(";
+                    return("Loss");
+                }
+                break;
+                    
+            case ("s"):
+                if(human === "p"){
+                    yourChoice = "Paper";
+                    outcomeMessage = "Your paper got cut.  You lose. :(";
+                    return("Loss");
+                } else if(human === "r"){
+                    yourChoice = "Rock";
+                    outcomeMessage = "Rock smashes scissors into tiny bits!! You win!!!";
+                    return("Win!");
+                }
 
-        default:
-            alert("Oh node! Something went wrong!");
-            break;
+            default:
+                alert("Oh node! Something went wrong!");
+                break;
+        }
     }
 }
 
@@ -104,6 +111,8 @@ function displayRecord() {
     alert(`
     Your choice: ${yourChoice}
     Computer choice: ${computerChoice}
+
+    ${outcomeMessage}
     
     ============
      Scoreboard
@@ -117,9 +126,9 @@ function displayRecord() {
 
 // Variables
 var userInput, computerInput;                           // Declare inputs
-var yourChoice, computerChoice;                         // Wordified values of selections
+var yourChoice, computerChoice, outcomeMessage;         // Wordified values of selections
 var winCount = 0, lossCount = 0, tieCount = 0;          // Initialize counters
-var playAgain = 1;                                    // Flag tracking whether or not a player plays the game once.
+var playAgain = 1;                                      // Flag tracking whether or not a player plays the game once.
 const validationArray = ["r","p","s"];
 
 // Display welcome message to user explaining the rules
@@ -127,9 +136,13 @@ const validationArray = ["r","p","s"];
 if (confirm("Welcome to Browser RPS!  Click 'OK/Confirm' to Proceed                                   Click 'Cancel' to run away :'(")){
     
     do{
+    
         // Read and store input from user
         // Generate PC choice   
         userInput = prompt("Please Select R, P, or S to signify your choice of rock, paper, or scissors");
+        while(!validationArray.includes(userInput) || userInput === null){
+            userInput = prompt("ERROR: Please select a VALID choice - R, P, or S to signify your choice of rock, paper, or scissors");
+        }
         computerInput = generateChoice();
         
         // Compare values and count
@@ -143,16 +156,17 @@ if (confirm("Welcome to Browser RPS!  Click 'OK/Confirm' to Proceed             
         }
     } while (playAgain === 1);
 
-} else {
-
-    // Change goodbye message if user visits the page but doesn't play a round
-    var goodbyeMessage = document.getElementById("goodbye-message");
-    var newSpan = document.createElement("span");
-    var text = document.createTextNode("even though you didn't play :P");
-    newSpan.appendChild(text);
-    goodbyeMessage.appendChild(newSpan);
-
 }
+// else {
+
+//     // Change goodbye message if user visits the page but doesn't play a round
+//     var goodbyeMessage = document.getElementById("goodbye-message");
+//     var newSpan = document.createElement("span");
+//     var text = document.createTextNode("even though you didn't play :P");
+//     newSpan.appendChild(text);
+//     goodbyeMessage.appendChild(newSpan);
+
+// }
 
 // Make the user message div visible when the player is finished playing
 document.getElementById("user-message").style.display = "block";
