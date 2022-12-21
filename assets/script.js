@@ -32,6 +32,7 @@ function generateChoice() {
     }
 }
 
+// Decide who wins!
 function whoWon(human, computer) {
     
         //Present an error and prompt user for a valid input until they enter one
@@ -115,17 +116,12 @@ function countIt(result) {
 function displayRecord() {
     
     alert(`
-    Your choice: ${yourChoice}
-    Computer choice: ${computerChoice}
-
+    Your choice: ${yourChoice}, Computer choice: ${computerChoice}
     ${outcomeMessage}
     
-    ============
      Scoreboard
     ============
-    Wins:   ${winCount}
-    Ties:   ${tieCount}
-    Losses: ${lossCount}
+    Wins: ${winCount}, Ties: ${tieCount}, Losses: ${lossCount}
     `
     );
 }
@@ -135,7 +131,7 @@ var userInput, computerInput;                           // Declare inputs
 var yourChoice, computerChoice, outcomeMessage;         // Wordified values of selections
 var winCount = 0, lossCount = 0, tieCount = 0;          // Initialize counters
 var playAgain = 1;                                      // Flag tracking whether or not a player plays the game once.
-const validationArray = ["r","p","s"];
+const validationArray = ["r","p","s","R","P","S"];
 
 // Display welcome message to user explaining the rules
 // Caution, disgusting spacing to bump to multiple lines in dialog box!!!
@@ -146,7 +142,12 @@ if (confirm(`Welcome to Browser RPS!  Click 'OK/Confirm' to Proceed
     
         // Read and store input from user
         // Generate PC choice   
-        userInput = prompt("Please Select R, P, or S to signify your choice of rock, paper, or scissors").toLowerCase();
+        
+        userInput = prompt("Please Select R, P, or S to signify your choice of rock, paper, or scissors");
+        if(userInput == null){
+            document.getElementById("user-message").style.display = "block";
+        }
+        userInput.toLowerCase();
         
         while(!validationArray.includes(userInput) || userInput === null){
             userInput = prompt("ERROR: Please select a VALID choice - R, P, or S to signify your choice of rock, paper, or scissors");
