@@ -139,13 +139,15 @@ const validationArray = ["r","p","s"];
 
 // Display welcome message to user explaining the rules
 // Caution, disgusting spacing to bump to multiple lines in dialog box!!!
-if (confirm("Welcome to Browser RPS!  Click 'OK/Confirm' to Proceed                                   Click 'Cancel' to run away :'(")){
+if (confirm(`Welcome to Browser RPS!  Click 'OK/Confirm' to Proceed
+            Click 'Cancel' to run away :'(`)){
     
     do{
     
         // Read and store input from user
         // Generate PC choice   
-        userInput = prompt("Please Select R, P, or S to signify your choice of rock, paper, or scissors");
+        userInput = prompt("Please Select R, P, or S to signify your choice of rock, paper, or scissors").toLowerCase();
+        
         while(!validationArray.includes(userInput) || userInput === null){
             userInput = prompt("ERROR: Please select a VALID choice - R, P, or S to signify your choice of rock, paper, or scissors");
         }
